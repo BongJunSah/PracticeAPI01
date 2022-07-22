@@ -1,0 +1,41 @@
+server: #server 설정
+  port: 9090  #port 9090으로 설정
+
+logging:
+  file:
+    name: /Users/sabongjun/Desktop/BJ/Log/test1.log # 파일 저장 위치.
+  level: #package 단위로 해당 log level을 설정한다.
+    com.kt.springdemo.controller : info #controller package 내부 info로 log level 설정. info 이상만 나온다.
+    com.kt.springdemo.dto : debug
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            # SQL에서 ? 표기된 부분을 로그로 출력해서 확인한다.
+            sql:
+              BasicBinder: TRACE
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:25432/postgres #IP Adress : Port/DB-name
+    username: robot             #postgresql에 생성한 user id
+    password: '!new1234'          #postgresql에 생성한 user pw. string 으로 넘겨줘야한다?
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      # none : 아무것도 실행하지 않는다.
+      # create-drop : SessionFactory가 시작될 떄 drop및 생성을 실행하고, SessionFactory 종료될 때 drop한다.
+      # create : SessionFactory가 시작될 때 데이터베이스 drop을 실행하고 생성된 DDL을 실행한다.
+      # update : 변경된 스키마를 적용한다.
+      # validate : 변경된 스키마가 있다면 변경점을 출력하고 애플리케이션을 종료한다.
+      ddl-auto: update
+      #콘솔에 JPA 실행 쿼리를 가독성 있게 표현한다.
+    # 콘솔에 sql 쿼리 표현.
+    show-sql: true
+    database: postgresql
+    #  Open Session In View : 웹 요청이 완료 될 떄 까지 동일한
+    #  EntityManager를 갖도록 해준다. -> 성능면에서 안좋다.
+    open-in-view: false
+    generate-ddl: true # 서버 시작 시점에 DDL문을 생성하여 DB에 적용한다.
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
