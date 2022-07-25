@@ -1,10 +1,27 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <title>Hello</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
 <body>
-<p th:text="'안녕하세요. ' + ${name}" >안녕하세요. 손님</p>
+<div class="container">
+  <div>
+    <h1>Menu for User Change</h1>
+    <p>
+      List of Menu
+    </p>
+    <p>
+      <a href="/users/new">Sign Up</a>
+    </p>
+    <p>
+      <a href="/users/retrieve">List Users</a>
+    </p>
+  </div>
+</div>
 </body>
 </html>
+<!-- >
+6. 태그
+a : 경로이동
+h : 제목, 숫자 UP -> 크기 Down
+div : id 등으로 구분
+p : 단락 구분
+span : 문장 inline 설정
+</!-->

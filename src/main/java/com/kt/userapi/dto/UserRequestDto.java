@@ -40,6 +40,14 @@ public class UserRequestDto {
     @NotNull(message = "Age can not be null.")
     private int age;
 
+    @Builder
+    public UserRequestDto(String name, String password, String email, int age) {
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.age = age;
+    }
+
     public UserEntity toEntity(){
         return UserEntity.builder()
                 .name(name)

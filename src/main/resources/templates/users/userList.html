@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="container">
+  <div>
+    <!-- >
+    table : 테이블을 만든다.
+      border : 테두리 크기
+      bordercolor : 테두리 색상
+      width : 너비
+      height : 높이
+      align : 정렬
+      bgcolor : 배경색
+      colspan : 가로 합병
+      rowspan : 세로 합병
+    th : 테이블의 헤더부분 맨 첫행 첫열
+    tr : 테이블의 행
+    td : 테이블의 열
+    </>!-->
+    <table border="1">
+      <thead>
+      <tr>
+        <th>NUMBER</th>
+        <th>이름</th>
+        <th>비밀번호</th>
+        <th>EMAIL</th>
+        <th>나이</th>
+        <th>생성일자</th>
+        <th>변경일자</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.password}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.age}"></td>
+        <td th:text="${user.createdDate}"></td>
+        <td th:text="${user.modifiedDate}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div> <!-- /container -->
+</body>
