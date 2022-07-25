@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 // public String getId() 자동 생성.
 @Setter
 // public void setId(String id) 자동 생성.
-@ToString(exclude = "password")
+@ToString(exclude = "userPassword")
 // toString() Method 자동 생성.
 @NoArgsConstructor
 public class UserRequestDto {
@@ -32,28 +32,29 @@ public class UserRequestDto {
     //@DateTimeFormat(pattern = "yyyy/MM/dd(E)")
     //@NumberFormat(style = style.NUMBER)
     @NotNull(message = "Name can not be null.")
-    private String name;
+    private String userName;
     @NotNull(message = "Password can not be null.")
-    private String password;
+    private String userPassword;
+    @NotNull
     @Email(message = "Email can not be null.")
-    private String email;
+    private String userEmail;
     @NotNull(message = "Age can not be null.")
-    private int age;
+    private int userAge;
 
     @Builder
-    public UserRequestDto(String name, String password, String email, int age) {
-        this.name = name;
-        this.password = password;
-        this.email = email;
-        this.age = age;
+    public UserRequestDto(String userName, String userPassword, String userEmail, int userAge) {
+        this.userName = userName;
+        this.userPassword = userPassword;
+        this.userEmail = userEmail;
+        this.userAge = userAge;
     }
 
     public UserEntity toEntity(){
         return UserEntity.builder()
-                .name(name)
-                .password(password)
-                .email(email)
-                .age(age)
+                .userName(userName)
+                .userPassword(userPassword)
+                .userEmail(userEmail)
+                .userAge(userAge)
                 .build();
     }
 }

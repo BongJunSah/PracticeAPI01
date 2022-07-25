@@ -61,7 +61,7 @@ public class UserController {
             return "Creating fail. Same name or email already exists.";
         }
         //log.info("Creating success in id : {}", id);
-        return "Create Success with id : " + id.toString();
+        return "Create Success with id : " + id;
     }
 
     // Path Variable
@@ -70,9 +70,8 @@ public class UserController {
     @GetMapping("/retrieve/name/{name}")
     public UserResponseDto retrieveUserByName(@PathVariable String name) {
         //log.info("Start retrieving user by name, {}.", name);
-        UserResponseDto userResponseDto = userService.findAccountByName(name);
         //log.info("Result of retrieving user by name, {}.", userResponseDto);
-        return userResponseDto;
+        return userService.findAccountByName(name);
     }
     // RequestParam Test
     // GET /api/user?email=sylee@gamil.com 과 연동된다.
@@ -80,27 +79,24 @@ public class UserController {
     @GetMapping("/retrieve/email")
     public UserResponseDto retrieveUserByEmail(@RequestParam("email") String email) {
         //log.info("Start retrieving user by email, {}.", email);
-        UserResponseDto userResponseDto = userService.findAccountByEmail(email);
         //log.info("Result of retrieving user by email, {}.", userResponseDto);
-        return userResponseDto;
+        return userService.findAccountByEmail(email);
     }
 
 
     @GetMapping("/retrieve/age")
     public List<UserResponseDto> retrieveUserByAge(@RequestParam("age") int age) {
         //log.info("Start retrieving user by age, {}.", age);
-        List<UserResponseDto> userResponseDtoList = userService.findAllAccountByAge(age);
         //log.info("Result of retrieving user by age, {}.", userResponseDtoList);
-        return userResponseDtoList;
+        return userService.findAllAccountByAge(age);
     }
 
     @GetMapping("/retrieve/all")
-    public List<UserResponseDto> retriveAllUser()
+    public List<UserResponseDto> retrieveAllUser()
     {
         //log.info("Start retrieving all user.");
-        List<UserResponseDto> userResponseDtoList = userService.findAllAccount();
         //log.info("Retrieving all user success.");
-        return userResponseDtoList;
+        return userService.findAllAccount();
     }
     /*
     @GetMapping("/test/error")
@@ -110,16 +106,21 @@ public class UserController {
      */
 
     @PutMapping("/update")
-    public String updateUser(@RequestParam("id") Long id, @Validated @RequestBody final UserRequestDto userRequestDto, BindingResult bindingResult) {
+    public String updateUser(@RequestParam("userId") Long userId, @Validated @RequestBody final UserRequestDto userRequestDto, BindingResult bindingResult) {
         //log.info("Start updating user by UserRequestDto : {}", userRequestDto);
         if(bindingResult.hasErrors()) {
             log.error("User request body validated error in updateUser.");
             return "Update Fail : Not Null Exception.";
         }
-        userService.updateAccount(id, userRequestDto);
+        Long id = userService.updateAccount(userId, userRequestDto);
+
+        if(id == (long)-1) {
+            log.info("Updating fail. Same name or email already exists.");
+            return "Updating fail. Same name or email already exists.";
+        }
         //현재 @ToString() 에서 exclude로 password를 제외시켜 놓아 로그에 적히지 않는다.
         //log.info("Updating success in id : {}", id);
-        return "Updating Success with id : " + id.toString();
+        return "Updating Success with id : " + userId.toString();
     }
 
     @DeleteMapping("/delete")

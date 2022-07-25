@@ -18,6 +18,7 @@ import javax.persistence.*;
 // @Annotation javax 활용. hibernate은 deprecated : 사용 X
 // Domain : 직접 DB에 저장되는 형태. 절대 dto와 병행해서 사용해서는 안된다.
 @Entity
+@Table(name = "user_entity")
 public class UserEntity extends BaseTimeEntity{
     // 해당 Table의 Primary Key 임을 나타낸다.
     // 생성 규칙으로서 기본값 AUTO : auto_increment 정수형 값이 된다. long
@@ -28,7 +29,8 @@ public class UserEntity extends BaseTimeEntity{
     //SEQUENCE : sequence column 활용
     //TABLE : 유일성이 보장된다.
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @Column(name = "user_id", updatable = false, insertable = false)
+    private Long userId;
 
     // @Column
     // name : 필드와 매핑할 테이블의 컬럼 이름을 지정.
@@ -40,18 +42,17 @@ public class UserEntity extends BaseTimeEntity{
     // scale : 소수의 자리수 설정.
     //@Column(length = 500, nullable = false)
     //Char VS Varchar : Char 은 사이즈 지정. VarChar은 그 크기만큼만 보여준다.
-    @Column(length = 500, nullable = false)
-    private String name;
+    @Column(name = "user_name",length = 500, nullable = false)
+    private String userName;
 
-    //@Column(columnDefinition = "TEXT", nullable = false)
-    @Column(columnDefinition = "TEXT", nullable = false)
-    private String password;
+    @Column(name = "user_password", columnDefinition = "TEXT", nullable = false)
+    private String userPassword;
 
-    @Column
-    private String email;
+    @Column(name = "user_email")
+    private String userEmail;
 
-    @Column
-    private int age;
+    @Column(name = "user_age")
+    private int userAge;
     //0. 점증적 생성자 패턴
     //필수로 받아야할 인자(title, content, author)들이 있고, 선택적으로 받아야 하는 인자(id)가 있다.
     //-> 선택적 인자를 받기 위해 생성자가 계속해서 생성된다. 현재 2개.
@@ -66,18 +67,18 @@ public class UserEntity extends BaseTimeEntity{
     //기본적으로 값 입력은 생성자를 통해 진행.
     //변경은 public method를 만들어 제공한다.
     @Builder
-    public UserEntity(String name, String password, String email, int age) {
-        this.name = name;
-        this.password = password;
-        this.email = email;
-        this.age = age;
+    public UserEntity(String userName, String userPassword, String userEmail, int userAge) {
+        this.userName = userName;
+        this.userPassword = userPassword;
+        this.userEmail = userEmail;
+        this.userAge = userAge;
     }
 
     // Entity를 update하는 함수.
-    public void update(String name, String password, String email, int age) {
-        this.name = name;
-        this.password = password;
-        this.email = email;
-        this.age = age;
+    public void update(String userName, String userPassword, String userEmail, int userAge) {
+        this.userName = userName;
+        this.userPassword = userPassword;
+        this.userEmail = userEmail;
+        this.userAge = userAge;
     }
 }

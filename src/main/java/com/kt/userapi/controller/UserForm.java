@@ -12,11 +12,12 @@ import javax.validation.constraints.NotNull;
 @ToString
 public class UserForm {
     @NotNull(message = "Name can not be null.")
-    private String userId;
+    private String userFormName;
     @NotNull(message = "Password can not be null.")
-    private String password;
+    private String userFormPassword;
+    @NotNull
     @Email(message = "Email can not be null.")
-    private String email;
+    private String userFormEmail;
     @NotNull(message = "Age can not be null.")
-    private int age;
+    private int userFormAge;
 }

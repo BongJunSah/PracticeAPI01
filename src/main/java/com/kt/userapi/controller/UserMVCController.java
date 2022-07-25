@@ -41,10 +41,10 @@ public class UserMVCController {
             return "redirect:/";
         }
         UserRequestDto userRequestDto = UserRequestDto.builder()
-                .name(form.getUserId())
-                .password(form.getPassword())
-                .email(form.getEmail())
-                .age(form.getAge())
+                .userName(form.getUserFormName())
+                .userPassword(form.getUserFormPassword())
+                .userEmail(form.getUserFormEmail())
+                .userAge(form.getUserFormAge())
                 .build();
         Long id = userService.createAccount(userRequestDto);
         if(id == (long)-1) {
@@ -60,5 +60,4 @@ public class UserMVCController {
         model.addAttribute("users", userResponseDtoList);
         return "users/userList";
     }
-
 }

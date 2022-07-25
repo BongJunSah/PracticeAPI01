@@ -5,16 +5,43 @@
   <form action="/users/create" method="post">
     <!-- >
     action : URL.
-    method : Post
+    method : Post / Get
+    1. Get
+      1-1 Code
+      <form action="http://hello.com" method="get">
+        <input name="message" value="Hello">
+        <button>Send a message</button>
+      </form>
+      1-2 Result
+      GET /?message=Hello HTTP/1.1
+      Host: hello.com
+`   2. Post
+      2-1. Code
+        <form action="http://hello.com" method="post">
+          <input name="message" value="Hello">
+          <button>Send a message</button>
+        </form>
+      2-2. Result
+        POST / HTTP/1.1
+        Host: hello.com
+        Content-Type: application/x-www-form-urlencoded
+        Content-Length: 13
+
+        message=Hello
     메세지 전달.
+    submit이 발생할 경우 정의된 method 유형으로 action에 전송.
     </>!-->
     <div class="form-group">
-      <label for="userId">ID</label>
+      <!-- >
+      form-group : 입력
+      form-control :
+      </>!-->
+      <label for="userFormName">ID</label>
       <!-- >
       form으로 grouping 하여 데이터를 전달한다.
       for : 변수명 대응 설정
       </>!-->
-      <input type="text" id="userId" name="userId" placeholder="ID를 입력하세요">
+      <input type="text" id="userFormName" name="userFormName" placeholder="ID를 입력하세요">
       <!-- >
       input : 입력 창을 생성한다.
       type : 입력 종류
@@ -33,12 +60,12 @@
       value : 입력태그의 초기값 (== default)
       placeholder : 사용자가 입력을 시작하기 전까지 나타나있다가 사라지는 값.
       </>!-->
-      <label for="password">PW</label>
-      <input type="text" id="password" name="password" placeholder="PW를 입력하세요">
-      <label for="email">EMAIL</label>
-      <input type="text" id="email" name="email" placeholder="E-MAIL을 입력하세요">
-      <label for="age">AGE</label>
-      <input type="text" id="age" name="age" placeholder="AGE를 입력하세요">
+      <label for="userFormPassword">PW</label>
+      <input type="text" id="userFormPassword" name="userFormPassword" placeholder="PW를 입력하세요">
+      <label for="userFormEmail">EMAIL</label>
+      <input type="text" id="userFormEmail" name="userFormEmail" placeholder="E-MAIL을 입력하세요">
+      <label for="userFormAge">AGE</label>
+      <input type="text" id="userFormAge" name="userFormAge" placeholder="AGE를 입력하세요">
     </div>
     <button type="submit">등록</button>
   </form>

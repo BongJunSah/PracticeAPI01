@@ -12,9 +12,9 @@ import java.util.Optional;
 //repository : DAO 로서 DB에 역할을 수행한다.
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
-    Optional<UserEntity> findByName(String name);
-    Optional<UserEntity> findByEmail(String email);
-    List<UserEntity> findAllByAge(int age);
-    boolean existsByName(String name);
-    boolean existsByEmail(String email);
+    Optional<UserEntity> findByUserName(String userName);
+    Optional<UserEntity> findByUserEmail(String userEmail);
+    List<UserEntity> findAllByUserAge(int userAge);
+    boolean existsByUserName(String userName);
+    boolean existsByUserEmail(String userEmail);
 }
