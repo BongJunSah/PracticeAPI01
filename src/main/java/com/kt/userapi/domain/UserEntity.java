@@ -8,7 +8,7 @@ import javax.persistence.*;
 //Default : 본 Package
 //Protected 제한 : class와 상속받은 class의 package 내부 허용.
 //Public : 제한 없음
-//Entity 클래스를 프로젝트 코드상에서 기본 생성자로 생성하는 것은 막고, JPA에서는 허용한다.
+//access = AccessLevel.PROTECTED -> Entity 클래스를 프로젝트 코드상에서 기본 생성자로 생성하는 것은 막고, JPA에서는 허용한다.
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 // @Setter
@@ -35,7 +35,7 @@ public class UserEntity extends BaseTimeEntity{
     // @Column
     // name : 필드와 매핑할 테이블의 컬럼 이름을 지정.
     // nullable : DDL 생성 시 null 값의 허용 여부. -> primitive 의 경우 null이 불가 false 설정 해줄것.
-    // unique : 중복 허용 여부 -> @Tabledml uniqueConstraints 사용이 권장.
+    // unique : 중복 허용 여부 -> @Table의 uniqueConstraints 사용이 권장.
     // length : String type에서 문자열 길이 정보
     // precision : 소수점을 포함한 전체 자리수 설정
     // columnDefinition : 데이터베이스 컬럼 정보 설정 : ex) varchar (100) default 'EMPTY'
@@ -53,6 +53,10 @@ public class UserEntity extends BaseTimeEntity{
 
     @Column(name = "user_age")
     private int userAge;
+
+    @OneToOne(mappedBy = "userEntity", fetch = FetchType.LAZY)
+    private BlogEntity blogEntity;
+
     //0. 점증적 생성자 패턴
     //필수로 받아야할 인자(title, content, author)들이 있고, 선택적으로 받아야 하는 인자(id)가 있다.
     //-> 선택적 인자를 받기 위해 생성자가 계속해서 생성된다. 현재 2개.
@@ -72,6 +76,18 @@ public class UserEntity extends BaseTimeEntity{
         this.userPassword = userPassword;
         this.userEmail = userEmail;
         this.userAge = userAge;
+    }
+
+    public void setBlogEntity(BlogEntity blogEntity) {
+        this.blogEntity = blogEntity;
+    }
+
+    // 양방향 매핑용 함수.
+    // 공부를 위해서는 조금 더 주인관계와 공부를 할 필요가 있다.
+    public void changeBlogEntity(BlogEntity blogEntity) {
+        //파라미터로 받은 blogEntity에 자기 자신을 setting.
+        blogEntity.setUserEntity(this);
+        this.setBlogEntity(blogEntity);
     }
 
     // Entity를 update하는 함수.

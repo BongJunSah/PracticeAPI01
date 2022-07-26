@@ -113,16 +113,6 @@ public class UserService {
         userRepository.deleteAll();
     }
 
-    // 이름으로 중복 검사.
-    public boolean checkNameDuplicate(String name) {
-        return userRepository.existsByUserEmail(name);
-    }
-
-    // 이메일로 중복 검사.
-    public boolean checkEmailDuplicate(String email) {
-        return userRepository.existsByUserEmail(email);
-    }
-
     // refactoring : ctrl + T
     // option + command + M : Method 추출
     // 만약 이름을 가지고 검색을 하였는데 있는 경우 Exception을 생성한다.

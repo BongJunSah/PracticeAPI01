@@ -24,6 +24,5 @@ public class UserResponseDto {
         this.createdDate = userEntity.getCreatedDate();
         this.modifiedDate = userEntity.getModifiedDate();
     }
-
 }
 
