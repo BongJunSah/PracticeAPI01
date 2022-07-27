@@ -2,10 +2,7 @@ package com.kt.userapi.service;
 
 import com.kt.userapi.domain.BlogEntity;
 import com.kt.userapi.domain.UserEntity;
-import com.kt.userapi.dto.BlogRequestDto;
-import com.kt.userapi.dto.BlogResponseDto;
-import com.kt.userapi.dto.UserRequestDto;
-import com.kt.userapi.dto.UserResponseDto;
+import com.kt.userapi.dto.*;
 import com.kt.userapi.exception.CustomException;
 import com.kt.userapi.exception.ErrorCode;
 import com.kt.userapi.repository.BlogRepository;
@@ -54,6 +51,12 @@ public class BlogService {
         return new BlogResponseDto(blogEntity);
     }
 
+    public List<PostResponseDto> findPostsByBlogId(Long blogId) {
+        BlogEntity blogEntity = blogRepository.findById(blogId).orElseThrow(
+                () -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
+        return blogEntity.getPostEntities().stream().map(PostResponseDto::new)
+                .collect(Collectors.toList());
+    }
     //@Transactional
     //블로그 갱신
     public Long updateBlog(final Long blogId, final BlogRequestDto blogRequestDto) {

@@ -1,6 +1,7 @@
 package com.kt.userapi.controller;
 
 import com.kt.userapi.dto.BlogResponseDto;
+import com.kt.userapi.dto.PostResponseDto;
 import com.kt.userapi.dto.UserRequestDto;
 import com.kt.userapi.dto.UserResponseDto;
 import com.kt.userapi.service.UserService;
@@ -95,6 +96,11 @@ public class UserController {
     @GetMapping("/retrieve/blog")
     public BlogResponseDto retrieveBlogByUserId(@RequestParam("userId") long userId) {
         return userService.findBlogByUserId(userId);
+    }
+
+    @GetMapping("/retrieve/posts")
+    public List<PostResponseDto> retrievePostsByUserId(@RequestParam("userId") long userId) {
+        return userService.findPostsByUserId(userId);
     }
 
     @GetMapping("/retrieve/all")

@@ -1,9 +1,6 @@
 package com.kt.userapi.controller;
 
-import com.kt.userapi.dto.BlogRequestDto;
-import com.kt.userapi.dto.BlogResponseDto;
-import com.kt.userapi.dto.UserRequestDto;
-import com.kt.userapi.dto.UserResponseDto;
+import com.kt.userapi.dto.*;
 import com.kt.userapi.service.BlogService;
 import com.kt.userapi.service.UserService;
 import lombok.AllArgsConstructor;
@@ -45,6 +42,11 @@ public class BlogController {
     @GetMapping("/retrieve/all")
     public List<BlogResponseDto> retrieveAllBlog() {
         return blogService.findAllBlog();
+    }
+
+    @GetMapping("/retrieve/posts")
+    public List<PostResponseDto> retrievePostsByBlogId(@RequestParam("blogId") long blogId) {
+        return blogService.findPostsByBlogId(blogId);
     }
 
     @PutMapping("/update")
