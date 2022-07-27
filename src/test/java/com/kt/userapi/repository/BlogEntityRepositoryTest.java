@@ -49,7 +49,7 @@ public class BlogEntityRepositoryTest {
                 .build());
 
         //현재 저장이후 각 바꿔 주면 Context 영속성에 의해 값이 DB에서도 변경된다.
-        createdUserEntity.changeBlogEntity(createdBlogEntity);
+        createdBlogEntity.changeUserEntity(createdUserEntity);
 
         BlogEntity searchedBlogEntity = blogRepository.findByBlogName("bjsah's blog").get();
         UserEntity searchedUserEntity = userRepository.findByUserName("time_test").get();

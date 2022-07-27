@@ -1,6 +1,7 @@
 package com.kt.userapi.service;
 
 import com.kt.userapi.domain.UserEntity;
+import com.kt.userapi.dto.BlogResponseDto;
 import com.kt.userapi.exception.CustomException;
 import com.kt.userapi.exception.ErrorCode;
 import com.kt.userapi.repository.UserRepository;
@@ -76,6 +77,12 @@ public class UserService {
         List<UserEntity> userEntityList = userRepository.findAllByUserAge(age);
         return userEntityList.stream().map(UserResponseDto::new)
                 .collect(Collectors.toList());
+    }
+
+    public BlogResponseDto findBlogByUserId(Long userId) {
+        UserEntity userEntity = userRepository.findById(userId).orElseThrow(
+                () -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
+        return new BlogResponseDto(userEntity.getBlogEntity());
     }
 
     // *영속성 컨텍스트 : Entity를 영구히 저장하는 환경.

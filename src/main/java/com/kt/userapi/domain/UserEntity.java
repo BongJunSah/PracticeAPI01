@@ -82,14 +82,6 @@ public class UserEntity extends BaseTimeEntity{
         this.blogEntity = blogEntity;
     }
 
-    // 양방향 매핑용 함수.
-    // 공부를 위해서는 조금 더 주인관계와 공부를 할 필요가 있다.
-    public void changeBlogEntity(BlogEntity blogEntity) {
-        //파라미터로 받은 blogEntity에 자기 자신을 setting.
-        blogEntity.setUserEntity(this);
-        this.setBlogEntity(blogEntity);
-    }
-
     // Entity를 update하는 함수.
     public void update(String userName, String userPassword, String userEmail, int userAge) {
         this.userName = userName;

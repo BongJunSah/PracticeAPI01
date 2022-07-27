@@ -51,14 +51,14 @@ public class BlogController {
     public String updateBlog(@RequestParam("blogId") Long blogId, @Validated @RequestBody final BlogRequestDto blogRequestDto, BindingResult bindingResult) {
         //log.info("Start updating user by UserRequestDto : {}", userRequestDto);
         if(bindingResult.hasErrors()) {
-            log.error("Blog request body validated error in updateUser.");
+            log.error("Blog request body validated error in updateBlog.");
             return "Update Fail : Not Null Exception.";
         }
         Long id = blogService.updateBlog(blogId, blogRequestDto);
 
         if(id == (long)-1) {
-            log.info("Updating fail. Same name or email already exists.");
-            return "Updating fail. Same name or email already exists.";
+            log.info("Updating fail. Same name already exists.");
+            return "Updating fail. Same name already exists.";
         }
 
         return "Updating Success with id : " + blogId;

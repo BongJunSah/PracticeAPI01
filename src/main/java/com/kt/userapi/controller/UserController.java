@@ -1,5 +1,6 @@
 package com.kt.userapi.controller;
 
+import com.kt.userapi.dto.BlogResponseDto;
 import com.kt.userapi.dto.UserRequestDto;
 import com.kt.userapi.dto.UserResponseDto;
 import com.kt.userapi.service.UserService;
@@ -91,6 +92,11 @@ public class UserController {
         return userService.findAllAccountByAge(age);
     }
 
+    @GetMapping("/retrieve/blog")
+    public BlogResponseDto retrieveBlogByUserId(@RequestParam("userId") long userId) {
+        return userService.findBlogByUserId(userId);
+    }
+
     @GetMapping("/retrieve/all")
     public List<UserResponseDto> retrieveAllUser()
     {
@@ -98,6 +104,7 @@ public class UserController {
         //log.info("Retrieving all user success.");
         return userService.findAllAccount();
     }
+
     /*
     @GetMapping("/test/error")
     public String testError() {

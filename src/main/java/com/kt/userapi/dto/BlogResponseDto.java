@@ -3,6 +3,7 @@ package com.kt.userapi.dto;
 import com.kt.userapi.domain.BlogEntity;
 import com.kt.userapi.domain.UserEntity;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 

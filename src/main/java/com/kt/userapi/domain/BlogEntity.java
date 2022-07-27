@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ser.Serializers;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -25,6 +26,9 @@ public class BlogEntity extends BaseTimeEntity {
     @JoinColumn(name = "user_id")
     private UserEntity userEntity;
 
+    @OneToMany(mappedBy = "blogEntity", fetch = FetchType.LAZY)
+    private List<PostEntity> postEntities;
+
     @Builder
     public BlogEntity(String blogName, String blogIntro) {
         this.blogName = blogName;
@@ -33,6 +37,10 @@ public class BlogEntity extends BaseTimeEntity {
 
     public void setUserEntity(UserEntity userEntity) {
         this.userEntity = userEntity;
+    }
+
+    public void addPostEntity(PostEntity postEntity) {
+        this.postEntities.add(postEntity);
     }
 
     public void changeUserEntity(UserEntity userEntity) {
